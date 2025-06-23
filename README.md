@@ -1,32 +1,95 @@
 # Scan-WP
 
-**Scan-WP** is a high-performance WordPress vulnerability detection tool focused on plugin and core version mapping against a curated CVE database. Designed for speed, it can scan thousands of WordPress sites in minutes, making it ideal for large-scale audits or reconnaissance operations.
+**Scan-WP** is a fast, multithreaded vulnerability scanner for WordPress websites.
+It detects installed plugins and WordPress core versions, then compares them against a local CVE database (RCE, SQLi, File Upload, etc.).
+The tool **does not exploit** any vulnerability — it only verifies known matches.
+
+> 🚀 Future updates will include automatic CVE database syncing, support for more CVE types, and faster scanning optimizations.
 
 ---
 
-## 🧠 Technical Description
+## 🔧 Features
 
-Scan-WP performs the following operations:
-
-- Loads a list of WordPress URLs from `list.txt`.
-- Fetches plugin names and versions for each target.
-- Detects the WordPress core version (if exposed).
-- Compares all detected components with a verified CVE database (2022–2025) containing confirmed PoCs.
-- Outputs matched vulnerabilities with plugin name, version, and CVE reference.
-- Does **not** attempt exploitation — detection only.
-
-This tool is built for speed, multithreading, and stability. It avoids false positives by relying on accurate fingerprinting and curated vulnerability data.
+* Detects WordPress core version
+* Extracts plugin names and versions
+* Matches vulnerabilities from a built-in CVE database inside the script
+* Fast scanning with multi-threading
+* Outputs vulnerable sites with relevant CVE info
+* Simple and clean terminal interface (using `rich`)
 
 ---
 
 ## 📦 Requirements
 
-- Python 3.8+
-- `list.txt` — contains one URL per line
-- Internet access (to fetch plugin info)
-
-Install dependencies:
+Install the required libraries using:
 
 ```bash
 pip install -r requirements.txt
+```
+
+### Required Libraries:
+
+```text
+requests  
+bs4  
+packaging  
+rich  
+```
+
+---
+
+## 📂 Installation
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/rakan2202000/Scan-WP.git
+cd Scan-WP
+```
+
+2. Create or update your `list.txt` with target URLs (one URL per line).
+
+> **Note:** The CVE database is already embedded inside the script (`Scan-WP.py`). No need for external JSON or database files.
+
+---
+
+## 🚀 Usage
+
+```bash
 python Scan-WP.py
+```
+
+Make sure `list.txt` exists in the same directory and contains the list of target WordPress sites.
+
+---
+
+## 📌 Example
+
+Sample `list.txt`:
+
+```
+https://example1.com
+https://example2.org
+```
+
+Expected output:
+
+```
+[+] Scanning: https://example1.com
+[+] Detected WordPress v6.2.2
+[+] Detected Plugins: elementor v3.15.1, wpforms v1.7.8
+[!] Vulnerable Plugin: elementor — CVE-2023-XXXXX
+[!] Vulnerable Plugin: wpforms — CVE-2024-YYYYY
+```
+
+---
+
+## ⚠️ Notes
+
+* The CVE database is hardcoded inside the script.
+* The tool only scans and matches vulnerabilities; it does **not** exploit them.
+* Use responsibly for authorized testing only.
+
+---
+
+**By Rakan**
