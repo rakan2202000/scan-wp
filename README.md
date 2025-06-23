@@ -26,4 +26,6 @@ This tool is built for speed, multithreading, and stability. It avoids false pos
 - Internet access (to fetch plugin info)
 
 Install dependencies:
+
+```bash
 pip install -r requirements.txt
