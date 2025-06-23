@@ -56,7 +56,7 @@ cd Scan-WP
 ## 🚀 Usage
 
 ```bash
-python Scan-WP.py
+python3 Scan-WP.py
 ```
 
 Make sure `list.txt` exists in the same directory and contains the list of target WordPress sites.
